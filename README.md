@@ -1,2 +1,2 @@
-# Yu-AI-Inference-Manifests
+# AI Inference Manifests
 
