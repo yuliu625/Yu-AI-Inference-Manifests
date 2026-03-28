@@ -1,0 +1,23 @@
+# windows configs
+
+## downloader settings
+settings:
+    local_model_dir: 'D:/hf_snapshots/models'
+    local_dataset_dir: 'D:/hf_snapshots/datasets'
+    is_only_torch: True
+    repo_concurrency: 4
+    file_concurrency: 32
+    hf_endpoint: "https://hf-mirror.com"
+    hf_home: None
+
+
+## downloading tasks to be done
+tasks:
+    models: [
+        "Qwen/Qwen2.5-0.5B-Instruct",
+        "Qwen/Qwen2-VL-2B-Instruct",
+    ]
+    datasets: [
+        "HuggingFaceTB/smoltalk",
+    ]
+
