@@ -1,0 +1,48 @@
+# litellm configuration file template
+## load key from environment variables: os.environ/<ENV-VAR> # runs os.getenv('ENV-VAR')
+# supported models and providers
+## - https://models.litellm.ai/
+## - https://docs.litellm.ai/docs/providers
+
+
+# [ENV: SANDBOX] Initialized for Windows - Local Debugging
+## Local sandbox environment for rapid prototyping and code debugging using quantized small-scale models.
+
+
+model_list:
+# ollama
+  - model_name: 'qwen2.5-0.5b'
+    litellm_params:
+      model: ollama/qwen2.5:0.5b
+      api_base: http://localhost:11434
+      api_key: none
+  - model_name: 'qwen2.5-1.5b'
+    litellm_params:
+      model: ollama/qwen2.5:1.5b
+      api_base: http://localhost:11434
+      api_key: none
+
+
+  # if for default model
+#  - model_name: "*"
+#    litellm_params:
+#      model: ''
+
+
+litellm_settings:
+  num_retries: 5  # retry call model_name
+  request_timeout: 120  # Timeout error
+#  allowed_fails: int  # cooldown
+#  drop_params: True
+#  success_callback: ['']
+
+
+# settings for the litellm proxy server
+#general_settings:
+#  routing_strategy: Literal["simple-shuffle", "least-busy", "usage-based-routing","latency-based-routing"], default="simple-shuffle"
+#  model_group_alias: dict
+#  num_retries: int
+#  timeout: int
+#  master_key: ''
+#  alerting: ['']
+
