@@ -1,0 +1,65 @@
+# litellm configuration file template
+## load key from environment variables: os.environ/<ENV-VAR> # runs os.getenv('ENV-VAR')
+# supported models and providers
+## - https://models.litellm.ai/
+## - https://docs.litellm.ai/docs/providers
+
+
+# [ENV: REMOTE] Initialized for MacBook - API Relay Only
+## Consolidated API gateway for proprietary models via cloud endpoints on thin-client hardware.
+
+
+model_list:
+# OpenAI
+# Google
+# Anthropic
+# DashScope
+  - model_name: 'qwen-long'
+    litellm_params:
+      model: openai/qwen-long
+      api_base: https://dashscope.aliyuncs.com/compatible-mode/v1
+      api_key: os.environ/DASHSCOPE_API_KEY
+      rpm: 1200
+      tpm: 3000000
+  - model_name: 'qwen-plus'
+    litellm_params:
+      model: openai/qwen-plus
+      api_base: https://dashscope.aliyuncs.com/compatible-mode/v1
+      api_key: os.environ/DASHSCOPE_API_KEY
+      rpm: 30000
+      tpm: 5000000
+  - model_name: 'qwen-max'
+    litellm_params:
+      model: openai/qwen-max
+      api_base: https://dashscope.aliyuncs.com/compatible-mode/v1
+      api_key: os.environ/DASHSCOPE_API_KEY
+      rpm: 12000
+      tpm: 1000000
+# DeepSeek
+
+
+  # if for default model
+#  - model_name: "*"
+#    litellm_params:
+#      model: ''
+
+
+litellm_settings:
+  routing_strategy: "latency-based-routing"
+  num_retries: 5  # retry call model_name
+  retry_after_detection: True
+  request_timeout: 120  # Timeout error
+#  allowed_fails: int  # cooldown
+#  drop_params: True
+#  success_callback: ['']
+
+
+# settings for the litellm proxy server
+#general_settings:
+#  routing_strategy: Literal["simple-shuffle", "least-busy", "usage-based-routing","latency-based-routing"], default="simple-shuffle"
+#  model_group_alias: dict
+#  num_retries: int
+#  timeout: int
+#  master_key: ''
+#  alerting: ['']
+
