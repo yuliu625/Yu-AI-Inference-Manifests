@@ -26,7 +26,7 @@ from typing import TYPE_CHECKING, Literal, Sequence
 
 class EmbeddingRequest(BaseModel):
     text: str = Field(
-        description="需要被编码的文本。"
+        description="需要被编码的文本。",
     )
     embedding_type: Literal['query', 'text'] = Field(
         description="编码类型，bge-m3 需要区别 query 和 text 。",
