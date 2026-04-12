@@ -1,6 +1,6 @@
 """
 Sources:
-    https://github.com/yuliu625/Yu-RAG-Toolkit/native_encoding/flag_embedding/bge_m3_embedding_model.py
+    https://github.com/yuliu625/Yu-AI-Inference-Manifests/model_adapters/native_encoding/flag_embedding/bge_m3.py
 
 References:
     https://huggingface.co/BAAI/bge-m3
@@ -56,7 +56,9 @@ class BGEM3EmbeddingModel:
             return_sparse=self._return_sparse,
             return_colbert_vecs=self._return_colbert_vecs,
         )
-        processed_result = self.process_raw_results(raw_results=results)
+        processed_result = self.process_raw_results(
+            raw_results=results,
+        )
         return dict(
             dense=processed_result['dense'][0],
             sparse=processed_result['sparse'][0],
