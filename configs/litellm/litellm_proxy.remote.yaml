@@ -36,6 +36,22 @@ model_list:
       rpm: 12000
       tpm: 1000000
 # DeepSeek
+  - model_name: 'deepseek-chat'
+    litellm_params:
+      model: deepseek/deepseek-chat
+      api_base: https://api.deepseek.com/
+      api_key: os.environ/DEEPSEEK_API_KEY
+  - model_name: 'deepseek-reasoner'
+    litellm_params:
+      model: deepseek/deepseek-reasoner
+      api_base: https://api.deepseek.com/
+      api_key: os.environ/DEEPSEEK_API_KEY
+# OpenRouter
+  - model_name: 'claude-opus-4.6'
+    litellm_params:
+      model: openrouter/anthropic/claude-opus-4.6
+      api_base: https://openrouter.ai/api/v1
+      api_key: os.environ/OPENROUTER_API_KEY
 
 
   # if for default model
@@ -45,12 +61,12 @@ model_list:
 
 
 litellm_settings:
+  drop_params: True
   routing_strategy: "latency-based-routing"
   num_retries: 5  # retry call model_name
   retry_after_detection: True
   request_timeout: 120  # Timeout error
-#  allowed_fails: int  # cooldown
-#  drop_params: True
+  allowed_fails: 3  # cooldown
 #  success_callback: ['']
 
 
