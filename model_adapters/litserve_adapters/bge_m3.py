@@ -86,8 +86,8 @@ class BGEM3EmbeddingModelQueryLitAPI(ls.LitAPI):
         self._return_sparse = True
         self._return_colbert_vecs = True
 
-    async def decode_request(self, request: TextEmbeddingRequest, **kwargs):
-        return TextEmbeddingRequest.text
+    async def decode_request(self, request, **kwargs):
+        return request['text']
 
     async def predict(self, query: str, **kwargs):
         # encode queries in different methods
@@ -105,11 +105,7 @@ class BGEM3EmbeddingModelQueryLitAPI(ls.LitAPI):
         )
 
     async def encode_response(self, output: dict, **kwargs):
-        return EmbeddingResponse(
-            dense=output['dense'],
-            sparse=output['sparse'],
-            multi_vector=output['multi_vector'],
-        )
+        return output
 
     def process_raw_results(
         self,
@@ -128,9 +124,19 @@ class BGEM3EmbeddingModelQueryLitAPI(ls.LitAPI):
         Returns:
             dict[str, list]: 转换后的结果。
         """
+        # process lexical_weights
+        sparse = []
+        for doc_weights in raw_results['lexical_weights']:
+            # 将字典中的 numpy.float32 转换为原生 float
+            converted_weights = {
+                str(token_id): float(weight)
+                for token_id, weight in doc_weights.items()
+            }
+            sparse.append(converted_weights)
+        # now they are all list
         processed_result = dict(
             dense=raw_results['dense_vecs'].tolist(),
-            sparse=raw_results['lexical_weights'],
+            sparse=sparse,
             multi_vector=[
                 np_multi_vector.tolist()
                 for np_multi_vector in raw_results['colbert_vecs']
@@ -163,8 +169,8 @@ class BGEM3EmbeddingModelTextLitAPI(ls.LitAPI):
         self._return_sparse = True
         self._return_colbert_vecs = True
 
-    async def decode_request(self, request: TextEmbeddingRequest, **kwargs):
-        return TextEmbeddingRequest.text
+    async def decode_request(self, request, **kwargs):
+        return request['text']
 
     async def predict(self, text: str, **kwargs):
         # encode texts in different methods
@@ -186,11 +192,7 @@ class BGEM3EmbeddingModelTextLitAPI(ls.LitAPI):
         )
 
     async def encode_response(self, output: dict, **kwargs):
-        return EmbeddingResponse(
-            dense=output['dense'],
-            sparse=output['sparse'],
-            multi_vector=output['multi_vector'],
-        )
+        return output
 
     def process_raw_results(
         self,
@@ -209,9 +211,19 @@ class BGEM3EmbeddingModelTextLitAPI(ls.LitAPI):
         Returns:
             dict[str, list]: 转换后的结果。
         """
+        # process lexical_weights
+        sparse = []
+        for doc_weights in raw_results['lexical_weights']:
+            # 将字典中的 numpy.float32 转换为原生 float
+            converted_weights = {
+                str(token_id): float(weight)
+                for token_id, weight in doc_weights.items()
+            }
+            sparse.append(converted_weights)
+        # now they are all list
         processed_result = dict(
             dense=raw_results['dense_vecs'].tolist(),
-            sparse=raw_results['lexical_weights'],
+            sparse=sparse,
             multi_vector=[
                 np_multi_vector.tolist()
                 for np_multi_vector in raw_results['colbert_vecs']
@@ -221,4 +233,22 @@ class BGEM3EmbeddingModelTextLitAPI(ls.LitAPI):
         assert isinstance(processed_result['sparse'], list)
         assert isinstance(processed_result['multi_vector'], list)
         return processed_result
+
+
+if __name__ == '__main__':
+    query_lit_api = BGEM3EmbeddingModelQueryLitAPI()
+    text_lit_api = BGEM3EmbeddingModelTextLitAPI()
+    query_server = ls.LitServer(
+        lit_api=query_lit_api,
+        accelerator='auto',
+    )
+    text_server = ls.LitServer(
+        lit_api=text_lit_api,
+        accelerator='auto',
+    )
+    # start server
+    query_server.run(
+        # host='0.0.0.0',
+        # port=8000,
+    )
 
