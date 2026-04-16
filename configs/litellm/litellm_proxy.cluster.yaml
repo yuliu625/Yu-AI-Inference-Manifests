@@ -22,17 +22,19 @@ model_list:
 # sglang
 
 
-  # if for default model
+# if for default model
 #  - model_name: "*"
 #    litellm_params:
 #      model: ''
 
 
 litellm_settings:
-  num_retries: int  # retry call model_name
-  request_timeout: int  # Timeout error
-#  allowed_fails: int  # cooldown
-#  drop_params: True
+  drop_params: True
+  routing_strategy: "latency-based-routing"
+  num_retries: 5  # retry call model_name
+  retry_after_detection: True
+  request_timeout: 120  # Timeout error
+  allowed_fails: 3  # cooldown
 #  success_callback: ['']
 
 
