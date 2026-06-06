@@ -1,9 +1,9 @@
 """
 Sources:
-    https://github.com/yuliu625/Yu-AI-Inference-Manifests/model_management_cli.py
+    https://github.com/yuliu625/Yu-AI-Inference-Manifests/blob/main/model_management_cli.py
 
 References:
-    https://github.com/yuliu625/Yu-AI-Inference-Stack/model_foundations/transformers/hf_download.py
+    https://github.com/yuliu625/Yu-AI-Inference-Stack/blob/main/modules/model_foundations/transformers/hf_download.py
 
 Synopsis:
     huggingface 仓库统一模型管理的 CLI 。
@@ -16,7 +16,7 @@ Notes:
 from __future__ import annotations
 from loguru import logger
 
-from model_foundations.hf_downloader import HFDownloader
+from source.model_foundations.hf_downloader import HFDownloader
 from pydantic import BaseModel, Field
 from pathlib import Path
 import yaml
