@@ -1,6 +1,6 @@
 """
 Sources:
-    https://github.com/yuliu625/Yu-AI-Inference-Stack/inference_engines/vllm/vllm_launcher.py
+    https://github.com/yuliu625/Yu-AI-Inference-Stack/blob/main/modules/inference_engines/vllm/vllm_launcher.py
 
 References:
     - https://docs.vllm.ai/en/stable/cli/
@@ -44,7 +44,7 @@ class VLLMLauncher:
         cuda_visible_devices: str,
     ) -> CompletedProcess[str]:
         """
-        阻塞启动vllm的方法。
+        阻塞启动 vllm 的方法。
 
         Args:
             mode (Literal['chat', 'complete', 'serve', 'bench', 'collect-env', 'run-batch']): 启动 vllm 的方式，最常使用的是 serve 。
