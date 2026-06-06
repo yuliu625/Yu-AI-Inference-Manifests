@@ -1,6 +1,6 @@
 """
 Sources:
-    https://github.com/yuliu625/Yu-AI-Inference-Manifests/model_adapters/native_encoding/flag_embedding/bge_m3.py
+    https://github.com/yuliu625/Yu-AI-Inference-Manifests/blob/main/source/model_adapters/native_encoding/flag_embedding/bge_m3.py
 
 References:
     https://huggingface.co/BAAI/bge-m3
