@@ -1,9 +1,9 @@
 """
 Sources:
-    https://github.com/yuliu625/Yu-AI-Inference-Manifests/model_adapters/litserve_adapters/bge_m3.py
+    https://github.com/yuliu625/Yu-AI-Inference-Manifests/blob/main/source/model_adapters/litserve_adapters/bge_m3.py
 
 References:
-    https://github.com/yuliu625/Yu-AI-Inference-Manifests/model_adapters/native_encoding/flag_embedding/bge_m3.py
+    https://github.com/yuliu625/Yu-AI-Inference-Manifests/blob/main/source/model_adapters/native_encoding/flag_embedding/bge_m3.py
 
 Synopsis:
     将 FlagEmbedding 的 bge-m3 使用 LitServe 推理服务化。
