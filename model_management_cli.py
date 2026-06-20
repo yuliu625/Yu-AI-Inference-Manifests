@@ -16,7 +16,7 @@ Notes:
 from __future__ import annotations
 from loguru import logger
 
-from source.model_foundations.hf_downloader import HFDownloader
+from src.model_foundations.hf_downloader import HFDownloader
 from pydantic import BaseModel, Field
 from pathlib import Path
 import yaml
